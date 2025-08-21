@@ -1,5 +1,3 @@
-const { GoogleGenerativeAI } = require('@google/generative-ai');
-
 exports.handler = async (event, context) => {
   // Enable CORS
   const headers = {
@@ -121,7 +119,7 @@ function getDemoResponse(message, conversationLength = 0) {
   return randomResponse + " " + contextResponses[Math.floor(Math.random() * contextResponses.length)];
 }
 
-// Gemini API integration
+// Gemini API integration using native fetch
 async function getGeminiResponse(messages, apiKey) {
   const key = apiKey || process.env.GEMINI_API_KEY || '';
   if (!key) {
@@ -165,6 +163,7 @@ async function getGeminiResponse(messages, apiKey) {
       return 'Sorry, I could not get a response from the Gemini API.';
     }
   } catch (error) {
+    console.error('Gemini API error:', error);
     return 'Sorry, there was an error connecting to the Gemini API. Please check your internet connection or try again later.';
   }
 }
