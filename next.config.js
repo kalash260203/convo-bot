@@ -1,6 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // App directory is now stable in Next.js 14
+  // Configure for Netlify deployment
+  output: 'export',
+  trailingSlash: true,
+  images: {
+    unoptimized: true
+  },
+  // Disable server-side features for static export
+  experimental: {
+    appDir: true
+  }
 }
 
 module.exports = nextConfig
